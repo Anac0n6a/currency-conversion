@@ -35,8 +35,10 @@ def upgrade():
     op.bulk_insert(
         currencies_table,
         [
-            {'name': 'US Dollar', 'code': 'USD', 'rate': 1.0, 'updated_at': '2024-02-21'},
-            {'name': 'Euro', 'code': 'EUR', 'rate': 0.85, 'updated_at': '2024-02-21'},
+            {'name': 'US Dollar', 'code': 'USD', 'rate': 1.0,
+             'updated_at': '2024-02-21'},
+            {'name': 'Euro', 'code': 'EUR', 'rate': 0.85,
+             'updated_at': '2024-02-21'},
 
         ]
     )
