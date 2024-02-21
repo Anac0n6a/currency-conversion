@@ -17,3 +17,4 @@ services:
       - db
     environment:
       - DATABASE_URL=postgresql://postgres:example@db/currency_db
+    command: sh -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000"

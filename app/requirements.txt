@@ -4,3 +4,4 @@ sqlalchemy
 asyncpg
 httpx
 psycopg2
+alembic
