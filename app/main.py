@@ -1,30 +1,12 @@
 from fastapi import FastAPI, HTTPException
-from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
+from database import engine, SessionLocal
+from models import Currency
+from datetime import datetime
 import httpx
 
 app = FastAPI()
-
-DATABASE_URL = "postgresql://postgres:example@db/currency_db"
-
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-class Currency(Base):
-    __tablename__ = "currencies"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    code = Column(String, unique=True)
-    rate = Column(Float)
-    updated_at = Column(String, default=str(datetime.utcnow()))
-
-Base.metadata.create_all(bind=engine)
 
 async def update_exchange_rates():
     async with httpx.AsyncClient() as client:
